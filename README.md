@@ -7,7 +7,7 @@ Branching Entropy를 형태소 분석과 함께 신조어 탐색에 써볼 수 �
 
 ## 방법
 
-1. [nori-clone](https://github.com/jeongukjae/nori-clone)을 활용하여 대량의 약 200만 문장을 분절
+1. [nori-clone](https://github.com/jeongukjae/nori-clone)을 활용하여 약 200만 문장을 분절
 2. 분절된 형태소 기준으로 branching entropy를 계산
 3. entropy가 높은 순대로 csv로 덤프
 
