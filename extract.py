@@ -15,6 +15,8 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string("corpus", "corpus", help="corpus directory")
 flags.DEFINE_string("left_output", "entropy-table-left.csv", help="left output")
 flags.DEFINE_string("right_output", "entropy-table-right.csv", help="right output")
+flags.DEFINE_integer("max_rows", 1000, "max rows")
+flags.DEFINE_integer("n_files", 1, "n_files")
 
 SUFFIX_INDICATOR = "##"
 
@@ -31,14 +33,14 @@ tokenizer = NoriTokenizer(dictionary)
 
 
 def main(argv):
-    files = glob.glob(os.path.join(FLAGS.corpus, "*"))
+    files = glob.glob(os.path.join(FLAGS.corpus, "*"))[: FLAGS.n_files]
     logging.info(f"Found {len(files)} files, files[:3]: {files[:3]}")
 
     left_side_freq = defaultdict(lambda: defaultdict(int))
     right_side_freq = defaultdict(lambda: defaultdict(int))
 
     with Pool() as pool:
-        for filename in tqdm(files[:1], position=0, desc="file"):
+        for filename in tqdm(files, position=0, desc="file"):
             for left_results, right_results in pool.imap_unordered(
                 _tokenize_and_add_space_info,
                 tqdm(_read_file(filename), position=1, desc="line"),
@@ -72,7 +74,7 @@ def main(argv):
         with open(filename, "w") as f:
             writer = csv.DictWriter(f, fieldnames=["term", "entropy"])
             writer.writeheader()
-            writer.writerows(rows)
+            writer.writerows(rows[: FLAGS.max_rows])
 
     _dump_entropy(left_side_freq, FLAGS.left_output)
     _dump_entropy(right_side_freq, FLAGS.right_output)
@@ -126,7 +128,8 @@ def _tokenize_and_add_space_info(
         for i in range(1, num_tokens):
             if any(p.startswith("S") for token in tokens[:i] for p in token[1].postag):
                 continue
-            if any(p == "E" for p in tokens[i - 1][1].postag):
+            block_list = {"E", "J"}
+            if any(p in block_list for p in tokens[i - 1][1].postag):
                 continue
 
             key = " ".join(t[0] for t in tokens[:i])
