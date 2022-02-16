@@ -21,4 +21,4 @@ Branching Entropy를 형태소 분석과 함께 신조어 탐색에 써볼 수 �
 ## 참고
 
 * <https://lovit.github.io/nlp/2018/04/09/branching_entropy_accessor_variety/>
-* <https://www.researchgate.net/profile/Zhihui-Jin/publication/220873812_Unsupervised_Segmentation_of_Chinese_Text_by_Use_of_Branching_Entropy/links/561db42808aecade1acb403e/Unsupervised-Segmentation-of-Chinese-Text-by-Use-of-Branching-Entropy.pdf>
+* <https://aclanthology.org/P06-2056/>
