@@ -18,6 +18,13 @@ Branching Entropy를 형태소 분석과 함께 신조어 탐색에 써볼 수 �
 * [left -> right entropy 계산 결과](./entropy-table-left.csv)
 * [right -> left entropy 계산 결과](./entropy-table-right.csv)
 
+## 실행
+
+```
+./download.sh
+python extract.py
+```
+
 ## 참고
 
 * <https://lovit.github.io/nlp/2018/04/09/branching_entropy_accessor_variety/>
