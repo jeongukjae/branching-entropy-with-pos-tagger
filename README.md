@@ -3,7 +3,7 @@
 Branching Entropy를 형태소 분석과 함께 신조어 탐색에 써볼 수 없을까 생각하며 테스트해본 레포지토리입니다.
 [나무위키 코퍼스](https://jeongukjae.github.io/tfds-korean/datasets/namuwiki_corpus.html)를 기준으로 형태소 분절 후 Branching Entropy를 계산하였습니다.
 
-설명 블로그 글: <https://jeongukjae.github.io/posts/pos-tagger-branching-entropy/>
+설명 블로그 글: <https://blog.ukjae.io/posts/pos-tagger-branching-entropy/>
 
 ## 방법
 
